@@ -1,0 +1,104 @@
+<head>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+        }
+        .gallery{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+        .row{
+            display:flex;
+            height: 400px;
+        }
+
+        .image{
+            width: 400px;
+            object-fit:cover;
+            cursor: pointer;
+        }
+
+        .detailedView{
+        transition: scale(0);
+            position: fixed;
+            top:5vh;
+            left: 5vw;
+            width: 90vw;
+            height: 90vh;
+            object-fit: contain;
+            cursor: pointer;
+           }
+
+        .scaled{
+            transform: scale(1) !important;
+        }
+        .overlay{
+            width: 100vw;
+            height: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+            background-color:rgba(1,1,1,0.6);
+            transition: transform 0.3s ease-in;
+
+            cursor: pointer;
+        }
+    </style>
+    </head>
+
+<body>
+    <div class="gallery">
+        <div class="row">
+            <img class="image"
+            src="https://images.unsplash.com/photo-1695685502620-defef89b051f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"/>
+            <img class="image"
+            src="https://plus.unsplash.com/premium_photo-1670738772747-c81429db3725?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"/>
+            <img class="image"
+            src="https://plus.unsplash.com/premium_photo-1675813863209-243d957868ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0N3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"/>
+        </div>
+        <div class="row">
+            <img class="image"
+            src="https://images.unsplash.com/photo-1695970922375-34520eca9bed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"/>
+            <img class="image"
+            src="https://images.unsplash.com/photo-1695931880955-f51fd17a8430?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMDl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"/>
+            <img class="image"
+            src="https://plus.unsplash.com/premium_photo-1686464487058-db679d44aa89?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMjJ8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"/>
+        </div>
+         <div class="row">
+            <img class="image"
+            src="https://images.unsplash.com/photo-1695278255455-9afc87008775?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNzN8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"/>
+            <img class="image"
+            src="https://images.unsplash.com/photo-1695137301054-2ab66674c8a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNzV8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"/>
+            <img class="image"
+            src="https://images.unsplash.com/photo-1695829078492-6c88a9d1aa36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOTN8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"/>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <img class="detailedView" src=""/>
+
+    <script>
+
+           const images = document.querySelectorAll('.image');
+        const detailedView = document.querySelector('.detailedView');
+        const overlay = document.querySelector('.overlay')
+
+        const whenImageClicked = (image) => {
+            detailedView.src = image.src;
+            detailedView.classList.add('scaled');
+            overlay.style.visibility = 'visible'
+        }
+         
+        const hideDetailedView = () =>{
+            detailedView.classList.remove('scaled');
+            overlay.style.visibility = 'hidden'
+        }
+        images.forEach((image) =>{
+            image.addEventListener('click', () => whenImageClicked(image));
+        });
+        detailedView.addEventListener('click', hideDetailedView);
+        overlay.addEventListener('click',hideDetailedView);
+    </script>
+</body>
